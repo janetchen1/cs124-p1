@@ -42,21 +42,20 @@ int main( int argc, char *argv[])
 		for (int i = 0; i < n; i++){
 			for (int j = 0; j < dimension; j++){
 	        	nodes[i][j] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-	        	printf("%f ", nodes[i][j]);
 	    	}
-	    	printf("\n");
 		}
 
 		for (int i = 0; i < n; i++){
 			for (int j = 0; j < n; j++){
 				float ex = weight(nodes[i], nodes[j], dimension);
-				printf("from node %i to node %i %f \n", i+1, j+1, ex);
+				printf("%f ", ex);
 		    }
 		    printf("\n");
 		}
 	}
 }
 
+// calculates distance from one node to another in given dimension space
 float weight(float node1[dimension], float node2[dimension], int dimension){
 	
 	float differences = 0;
