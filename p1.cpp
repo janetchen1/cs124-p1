@@ -1,34 +1,67 @@
 #include <iostream>
-#include <vector>
 #include <time.h>
+#include <cmath>
 
-use namespace std;
+using namespace std;
 
-float weight(vector<float> node1, vector<float> node2, int dimension);
+int dimension;
 
-int main()
+float weight(float[], float[], int);
+
+int main( int argc, char *argv[])
 {
-	int dimention = 5;
-	int n = 10;
-
-	vector<float> nodes(dimension, 0)[n];
-	srand((unsigned)time(NULL));
-	for (int i = 0; i < n; i++){
-		for (int j = 0; j < dimension; j++){
-        	nodes[i][j] = rand() % 1;
-        	printf("%f ", nodes[i][j]);
-    	}
-    	printf("\n");
+	if (argc != 5){
+		printf("Incorrect number of parameters\n");
+		return 0;
 	}
 
+	dimension = stoi(argv[4]);
+	int n = stoi(argv[2]);
+	srand((unsigned)time(NULL));
 
+	// zero-dimension case: create NxN array with weights of all connections
+	if (dimension == 0){
+		float nodes[n][n];
+		for (int i = 0; i < n; i++){
+			for (int j = 0; j < n; j++){
+				if (i == j){
+					nodes[i][j] = 0;
+				}
+				else{
+					nodes[i][j] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+				}
+        		printf("%f ", nodes[i][j]);
+        	}
+        	printf("\n");
+    	}
+	}
+
+	// other cases: create NxDim array, assign random vals, calculate weights after
+	else{
+		float nodes[n][dimension];
+		for (int i = 0; i < n; i++){
+			for (int j = 0; j < dimension; j++){
+	        	nodes[i][j] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	        	printf("%f ", nodes[i][j]);
+	    	}
+	    	printf("\n");
+		}
+
+		for (int i = 0; i < n; i++){
+			for (int j = 0; j < n; j++){
+				float ex = weight(nodes[i], nodes[j], dimension);
+				printf("from node %i to node %i %f \n", i+1, j+1, ex);
+		    }
+		    printf("\n");
+		}
+	}
 }
 
-float weight(vector<float> node1, vector<float> node2, int dimension){
+float weight(float node1[dimension], float node2[dimension], int dimension){
 	
 	float differences = 0;
-	for (i = 0; i < dimension; i++){
-		differences += (node1[i] - node2[i])^2;
+	for (int i = 0; i < dimension; i++){
+		differences += pow((node1[i] - node2[i]), 2);
 	}
 	return sqrt(differences);
 }
