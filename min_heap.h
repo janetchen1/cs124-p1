@@ -25,5 +25,6 @@ public:
 	bool DecreaseKey(int ID, float newWeight);
 	void PrintHeap();
 	bool IsEmpty();
+	std::vector<int> IDsRemaining();
 };
 

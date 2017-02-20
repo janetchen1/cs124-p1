@@ -120,9 +120,25 @@ void MinHeap::PrintHeap(){
 	for (int j = 0; j < _indexmap.size(); ++j){
 		cout << j << ": " << _indexmap[j] << ", ";
 	}
+	cout << "\nRemaining: ";
+	vector<int> remaining = IDsRemaining();
+	for (int k = 0; k < remaining.size(); ++k){
+		cout << remaining[k] << ", ";
+	}
 	cout << "\n";
 }
 
 bool MinHeap::IsEmpty(){
 	return _heap.empty();
+}
+
+vector<int> MinHeap::IDsRemaining(){
+	vector<int> remaining;
+	for (int i = 1; i < _indexmap.size(); ++i){
+		if (_indexmap[i] != -1){
+			remaining.push_back(i);
+		}
+	}
+
+	return remaining;
 }
