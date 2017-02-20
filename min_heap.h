@@ -22,7 +22,7 @@ public:
 	Leaf Peek();
 	Leaf ExtractMin();
 	//void Insert(Leaf newVal);
-	void DecreaseKey(int ID, float newWeight);
+	bool DecreaseKey(int ID, float newWeight);
 	void PrintHeap();
 	bool IsEmpty();
 };

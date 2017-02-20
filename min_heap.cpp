@@ -94,13 +94,16 @@ Leaf MinHeap::ExtractMin(){
 	return temp;
 }
 
-void MinHeap::DecreaseKey(int ID, float newWeight){
+bool MinHeap::DecreaseKey(int ID, float newWeight){
 	int index_of_node = _indexmap[ID];
 	float curr_weight = get<0>(_heap[index_of_node]);
-	
+
 	if (curr_weight > newWeight){
 		_heap[index_of_node] = make_tuple(newWeight, ID);
 		HeapUp(index_of_node);	
+		return true;
+	} else {
+		return false;
 	}
 }
 
