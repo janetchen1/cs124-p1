@@ -41,7 +41,7 @@ int main(void){
 	cout << "Heap pre-decrease: ";
 	mh.PrintHeap();
 	cout << "\n";
-	mh.DecreaseKey(6, 5.2);
+	mh.DecreaseKey(6, 70);
 	cout << "Heap post-decrease: ";
 	mh.PrintHeap();
 	cout << "\n";
