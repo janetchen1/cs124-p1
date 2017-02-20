@@ -1,6 +1,8 @@
 #include <iostream>
 #include <time.h>
 #include <cmath>
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -15,8 +17,8 @@ int main( int argc, char *argv[])
 		return 0;
 	}
 
-	dimension = stoi(argv[4]);
-	int n = stoi(argv[2]);
+	dimension = atoi(argv[4]);
+	int n = atoi(argv[2]);
 	srand((unsigned)time(NULL));
 
 	// zero-dimension case: create NxN array with weights of all connections
@@ -56,7 +58,7 @@ int main( int argc, char *argv[])
 }
 
 // calculates distance from one node to another in given dimension space
-float weight(float node1[dimension], float node2[dimension], int dimension){
+float weight(float node1[], float node2[], int dimension){
 	
 	float differences = 0;
 	for (int i = 0; i < dimension; i++){
