@@ -11,7 +11,6 @@ using namespace std;
 int dimension;
 float weight1();
 float weight23(int, vector<float>, vector<float>);
-//float weight(int, float*, float*);
 
 int main( int argc, char *argv[])
 {
@@ -32,6 +31,7 @@ int main( int argc, char *argv[])
 	vector< vector<float> > nodes;
 
 	// other cases: create NxDim array, assign random vals, calculate weights after
+	// ******TODO*********: for the dimension > 0 case, this should be moved to the for loop, since new coordinates need to be generated for every trial.
 	if (dimension != 0) {
 		vector<float> verticeRow;
 
@@ -124,24 +124,14 @@ int main( int argc, char *argv[])
 	}
 }
 
-// calculates distance from one node to another in given dimension space [cases ii and iii] OR
-// returns randomly generated weight [case i]
-// float weight(int dimension, int inp1, int inp2){
-// 	if (dimension == 1){
-// 		return (static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
-// 	} else {
-// 		float differences = 0;
-// 		for (int i = 0; i < dimension; ++i){
-// 			differences += pow((nodes[inp1][i] - nodes[inp2][i]), 2);
-// 		}
-// 		return sqrt(differences);		
-// 	}
-// }
 
+// for 0-dimension case, generate weight as necessary
 float weight1(){
 	return (static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
 }
 
+
+// for n-dimension case, return weight given coordinates
 float weight23(int dimension, vector<float> node1, vector<float> node2){
 	float differences = 0;
 	for (int i = 0; i < dimension; ++i){
@@ -149,17 +139,3 @@ float weight23(int dimension, vector<float> node1, vector<float> node2){
 	}
 	return sqrt(differences);	
 }
-
-
-
-/*float weight(int dimension, float node1[] = [], float node2[] = []){
-	if (dimension == 1){
-		return nstatic_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-	} else {
-		float differences = 0;
-		for (int i = 0; i < dimension; i++){
-			differences += pow((node1[i] - node2[i]), 2);
-		}
-		return sqrt(differences);		
-	}
-}*/
