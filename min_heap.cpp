@@ -85,13 +85,27 @@ Leaf MinHeap::ExtractMin(){
 	int length = _heap.size();
 
 	Leaf temp = Peek();
-	_heap[0] = _heap[length - 1];
-	_heap.erase(_heap.end()-1);
+
+	// mark extracted node as extracted
 	int nodeID = get<1>(temp);
 	_indexmap[nodeID] = -1;
-	HeapDown(0);
 
-	return temp;
+	if (length == 1){
+		_heap.erase(_heap.begin());
+		return temp;
+	} else {
+		// update indexmap
+		int topID = get<1>(_heap[length - 1]);
+		_indexmap[topID] = 0;
+
+		// copy last element to top and delete last element
+		_heap[0] = _heap[length - 1];
+		_heap.erase(_heap.end()-1);
+
+		// re-heapify
+		HeapDown(0);
+		return temp;
+	}
 }
 
 bool MinHeap::DecreaseKey(int ID, float newWeight){

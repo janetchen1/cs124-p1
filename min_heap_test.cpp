@@ -47,6 +47,34 @@ int main(void){
 	cout << "\n";
 	cout << "Swapped: " << swapped << "\n";
 
+	cout << "Testing IsEmpty...\n";
+	bool empty;
+	mh.ExtractMin();
+	mh.PrintHeap();
+	empty = mh.IsEmpty();
+	cout << empty << "\n";
+	cout << "\n";
+	mh.ExtractMin();
+	mh.PrintHeap();
+	empty = mh.IsEmpty();
+	cout << empty << "\n";
+	cout << "\n";
+	mh.ExtractMin();
+	mh.PrintHeap();
+	empty = mh.IsEmpty();
+	cout << empty << "\n";
+	cout << "\n";
+	mh.ExtractMin();
+	mh.PrintHeap();
+	empty = mh.IsEmpty();
+	cout << empty << "\n";
+	cout << "\n";
+	mh.ExtractMin();
+	mh.PrintHeap();
+	empty = mh.IsEmpty();
+	cout << empty << "\n";
+
+
 	/* cout << "Testing Insert...\n";
 	cout << "Heap pre-insert: ";
 	mh.PrintHeap();
