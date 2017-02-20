@@ -37,6 +37,15 @@ int main(void){
 	mh.PrintHeap();
 	cout << "\n";
 
+	cout << "Testing DecreaseKey...\n";
+	cout << "Heap pre-decrease: ";
+	mh.PrintHeap();
+	cout << "\n";
+	mh.DecreaseKey(6, 5.2);
+	cout << "Heap post-decrease: ";
+	mh.PrintHeap();
+	cout << "\n";
+
 	/* cout << "Testing Insert...\n";
 	cout << "Heap pre-insert: ";
 	mh.PrintHeap();

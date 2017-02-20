@@ -63,9 +63,13 @@ void MinHeap::HeapUp(int index){
 	int parent = (int) floor((index - 1) / D);
 
 	if (get<0>(_heap[parent]) > get<0>(_heap[index])){
-		swap(_heap[index], _heap[parent]);
 		// update indexmap
-		swap(_indexmap[index], _indexmap[parent]);
+		int indexID = get<1>(_heap[index]);
+		int parentID = get<1>(_heap[parent]);
+		_indexmap[indexID] = parent;
+		_indexmap[parentID] = index;
+
+		swap(_heap[index], _heap[parent]);
 		HeapUp(parent);
 	} else {
 		// once finish one call without a swap, everything above is correct
@@ -90,6 +94,12 @@ Leaf MinHeap::ExtractMin(){
 	return temp;
 }
 
+void MinHeap::DecreaseKey(int ID, float newWeight){
+	int index_of_node = _indexmap[ID];
+	_heap[index_of_node] = make_tuple(newWeight, ID);
+	HeapUp(index_of_node);
+}
+
 /*void MinHeap::Insert(Leaf newVal){
 	_heap.push_back(newVal);
 	HeapUp(_heap.size() - 1);
@@ -104,4 +114,8 @@ void MinHeap::PrintHeap(){
 		cout << j << ": " << _indexmap[j] << ", ";
 	}
 	cout << "\n";
+}
+
+bool MinHeap::IsEmpty(){
+	return _heap.empty();
 }
