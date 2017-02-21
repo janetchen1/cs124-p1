@@ -38,19 +38,20 @@ int main( int argc, char *argv[])
 		for (int i = 0; i < numpoints; i++){
 			for (int j = 0; j < dimension; j++){
 				float new_coord = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-				cout << "cd: " << new_coord << "\n";
 				verticeRow.push_back(new_coord);
 			}
 			nodes.push_back(verticeRow);
+			verticeRow.clear();
 		}
-
+		/*
 		for (int i = 0; i < numpoints; i++){
 			for (int j = 0; j < numpoints; j++){
 				float ex = weight23(dimension, nodes[i], nodes[j]);
-				printf("%f ", ex);
+				printf("%f \n", ex);
 		    }
 		    printf("\n");
 		}
+		*/
 	}
 
 	// create vector to store weight of each trial's MST
@@ -111,11 +112,12 @@ int main( int argc, char *argv[])
 				}
 			}
 		}
-
+		/*
 		cout << "\ndist[]: ";
 		for (int k = 0; k < dist.size(); ++k){
 			cout << dist[k] << " ";
 		}
+		*/
 
 		// all nodes added, find MST weight
 		float sum = accumulate(dist.begin(), dist.end(), 0.0f);
