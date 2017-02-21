@@ -62,9 +62,9 @@ int main( int argc, char *argv[])
 	// run Prim's numtrials times:
 	for (int tr = 0; tr < numtrials; ++tr){		
 		// convert weight/coordinate arrays into a Leaf array with exception of 0th vertice, which will be root
-		Leaf node_leaves[numpoints - 1];
+		vector<Leaf> node_leaves;
 		for (int j = 0; j < numpoints - 1; ++j){
-			node_leaves[j] = make_tuple(max_edge, j + 1);
+			node_leaves.push_back(make_tuple(max_edge, j + 1));
 		}
 
 		mh.BuildHeap(node_leaves, numpoints - 1);

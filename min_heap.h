@@ -17,7 +17,7 @@ private:
 	void HeapUp(int index);
 	void HeapDown(int index);
 public:
-	void BuildHeap(Leaf nodes[], int length);
+	void BuildHeap(std::vector<Leaf> nodes, int length);
 
 	Leaf Peek();
 	Leaf ExtractMin();

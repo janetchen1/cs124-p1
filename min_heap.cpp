@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void MinHeap::BuildHeap(Leaf nodes[], int length){
+void MinHeap::BuildHeap(vector<Leaf> nodes, int length){
 	_indexmap.resize(length + 1);
 	for (int i = 0; i < length; ++i){
 		// copy nodes into heap
