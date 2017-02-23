@@ -80,6 +80,7 @@ int main( int argc, char *argv[])
 				mh.DecreaseKey(i, weight23(dimension, nodes[0], nodes[i]));
 			}
 		}
+		int counter = 0;
 	
 		while (!mh.IsEmpty()){
 			Leaf u = mh.ExtractMin();
@@ -103,6 +104,10 @@ int main( int argc, char *argv[])
 				if (swapped){
 					prev[v] = u_id;
 				}
+			}
+			counter ++;
+			if (counter % 10 == 0){
+				printf("%i \n", counter);
 			}
 		}
 		/*
