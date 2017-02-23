@@ -27,4 +27,3 @@ public:
 	bool IsEmpty();
 	std::vector<int> IDsRemaining();
 };
-

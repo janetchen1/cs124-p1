@@ -30,30 +30,6 @@ int main( int argc, char *argv[])
 
 	vector< vector<float> > nodes;
 
-	// other cases: create NxDim array, assign random vals, calculate weights after
-	// ******TODO*********: for the dimension > 0 case, this should be moved to the for loop, since new coordinates need to be generated for every trial.
-	if (dimension != 0) {
-		vector<float> verticeRow;
-
-		for (int i = 0; i < numpoints; i++){
-			for (int j = 0; j < dimension; j++){
-				float new_coord = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-				verticeRow.push_back(new_coord);
-			}
-			nodes.push_back(verticeRow);
-			verticeRow.clear();
-		}
-		/*
-		for (int i = 0; i < numpoints; i++){
-			for (int j = 0; j < numpoints; j++){
-				float ex = weight23(dimension, nodes[i], nodes[j]);
-				printf("%f \n", ex);
-		    }
-		    printf("\n");
-		}
-		*/
-	}
-
 	// create vector to store weight of each trial's MST
 	vector<float> trial_weights(numtrials);
 
@@ -62,6 +38,23 @@ int main( int argc, char *argv[])
 
 	// run Prim's numtrials times:
 	for (int tr = 0; tr < numtrials; ++tr){		
+
+		// other cases: create NxDim array, assign random vals, calculate weights after
+		// ******TODO*********: for the dimension > 0 case, this should be moved to the for loop, since new coordinates need to be generated for every trial.
+		if (dimension != 0) {
+			nodes.clear();
+			vector<float> verticeRow;
+
+			for (int i = 0; i < numpoints; i++){
+				for (int j = 0; j < dimension; j++){
+					float new_coord = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+					verticeRow.push_back(new_coord);
+				}
+				nodes.push_back(verticeRow);
+				verticeRow.clear();
+			}
+		}
+
 		// convert weight/coordinate arrays into a Leaf array with exception of 0th vertice, which will be root
 		vector<Leaf> node_leaves;
 		for (int j = 0; j < numpoints - 1; ++j){
