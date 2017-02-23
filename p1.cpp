@@ -23,6 +23,8 @@ int main( int argc, char *argv[])
 	int numpoints = atoi(argv[2]);
 	int numtrials = atoi(argv[3]);
 
+	printf("\nINFO n = %i, dimensions = %i \n", numpoints, dimension);
+
 	// number greater than the max possible edge length given dimension; will function as infinity
 	float max_edge = ceil(sqrt(dimension)) + 1;
 
@@ -40,7 +42,6 @@ int main( int argc, char *argv[])
 	for (int tr = 0; tr < numtrials; ++tr){		
 
 		// other cases: create NxDim array, assign random vals, calculate weights after
-		// ******TODO*********: for the dimension > 0 case, this should be moved to the for loop, since new coordinates need to be generated for every trial.
 		if (dimension != 0) {
 			nodes.clear();
 			vector<float> verticeRow;
@@ -74,7 +75,6 @@ int main( int argc, char *argv[])
 		for (int i = 1; i < numpoints; ++i){
 			if (dimension == 0) {
 				float wght = weight1();
-				cout << wght << " ";
 				mh.DecreaseKey(i, wght);
 			} else {
 				mh.DecreaseKey(i, weight23(dimension, nodes[0], nodes[i]));
@@ -96,7 +96,6 @@ int main( int argc, char *argv[])
 				bool swapped;
 				if (dimension == 0) {
 					float wght = weight1();
-					cout << wght << " ";
 					swapped = mh.DecreaseKey(v, wght);
 				} else {
 					swapped = mh.DecreaseKey(v, weight23(dimension, nodes[u_id], nodes[v]));
@@ -105,22 +104,18 @@ int main( int argc, char *argv[])
 					prev[v] = u_id;
 				}
 			}
+			
 			counter ++;
-			if (counter % 10 == 0){
+			if (counter % 10000 == 0){
 				printf("%i \n", counter);
 			}
+			
 		}
-		/*
-		cout << "\ndist[]: ";
-		for (int k = 0; k < dist.size(); ++k){
-			cout << dist[k] << " ";
-		}
-		*/
 
 		// all nodes added, find MST weight
 		float sum = accumulate(dist.begin(), dist.end(), 0.0f);
 		trial_weights[tr] = sum;
-		cout << "\nTrial " << tr << " MST Weight: " << trial_weights[tr] << "\n";
+		cout <<trial_weights[tr] << "\n";
 	}
 }
 
