@@ -104,11 +104,12 @@ int main( int argc, char *argv[])
 					prev[v] = u_id;
 				}
 			}
-			
+			/*
 			counter ++;
 			if (counter % 10000 == 0){
 				printf("%i \n", counter);
 			}
+			*/
 			
 		}
 
