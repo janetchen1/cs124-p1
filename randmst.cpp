@@ -41,7 +41,7 @@ int main( int argc, char *argv[])
 	// run Prim's numtrials times:
 	for (int tr = 0; tr < numtrials; ++tr){		
 
-		// other cases: create NxDim array, assign random vals, calculate weights after
+		// create NxDim array, assign random vals for vertices
 		if (dimension != 0) {
 			nodes.clear();
 			vector<float> verticeRow;
@@ -71,7 +71,7 @@ int main( int argc, char *argv[])
 		vector<float> dist(numpoints, -1);		
 		dist[0] = 0;
 
-		// decrease keys as necessary
+		// decrease keys as necessary based on edges from root
 		for (int i = 1; i < numpoints; ++i){
 			if (dimension == 0) {
 				float wght = weight1();
@@ -83,6 +83,7 @@ int main( int argc, char *argv[])
 		int counter = 0;
 	
 		while (!mh.IsEmpty()){
+			// pop smallest edge from heap
 			Leaf u = mh.ExtractMin();
 			float u_wgt = get<0>(u);
 			int u_id = get<1>(u);
@@ -104,16 +105,9 @@ int main( int argc, char *argv[])
 					prev[v] = u_id;
 				}
 			}
-			/*
-			counter ++;
-			if (counter % 10000 == 0){
-				printf("%i \n", counter);
-			}
-			*/
-			
 		}
 
-		// all nodes added, find MST weight
+		// add all edges to find MST weight
 		float sum = accumulate(dist.begin(), dist.end(), 0.0f);
 		trial_weights[tr] = sum;
 		cout <<trial_weights[tr] << "\n";
@@ -121,7 +115,7 @@ int main( int argc, char *argv[])
 }
 
 
-// for 0-dimension case, generate weight as necessary
+// for 0-dimension case, randomly generate weight between 0 and 1
 float weight1(){
 	return (static_cast <float> (rand()) / static_cast <float> (RAND_MAX));
 }

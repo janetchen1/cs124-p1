@@ -54,7 +54,7 @@ void MinHeap::HeapDown(int index){
 
 		swap(_heap[index], _heap[lowest]);
 		
-		// check if swaps needed further down tree
+		// perform any swaps needed further down tree
 		HeapDown(lowest);
 	}
 }
@@ -62,6 +62,7 @@ void MinHeap::HeapDown(int index){
 void MinHeap::HeapUp(int index){
 	int parent = (int) floor((index - 1) / D);
 
+	// check whether swap is necessary
 	if (get<0>(_heap[parent]) > get<0>(_heap[index])){
 		// update indexmap
 		int indexID = get<1>(_heap[index]);
@@ -72,7 +73,7 @@ void MinHeap::HeapUp(int index){
 		swap(_heap[index], _heap[parent]);
 		HeapUp(parent);
 	} else {
-		// once finish one call without a swap, everything above is correct
+		// once finishes one call without a swap, everything above is correct
 		return;
 	}
 }
@@ -109,9 +110,11 @@ Leaf MinHeap::ExtractMin(){
 }
 
 bool MinHeap::DecreaseKey(int ID, float newWeight){
+	// refernce indexmap to find location in heap of desired node
 	int index_of_node = _indexmap[ID];
 	float curr_weight = get<0>(_heap[index_of_node]);
 
+	// only decrease key if new weight < curr weight
 	if (curr_weight > newWeight){
 		_heap[index_of_node] = make_tuple(newWeight, ID);
 		HeapUp(index_of_node);	
@@ -121,11 +124,8 @@ bool MinHeap::DecreaseKey(int ID, float newWeight){
 	}
 }
 
-/*void MinHeap::Insert(Leaf newVal){
-	_heap.push_back(newVal);
-	HeapUp(_heap.size() - 1);
-}*/
 
+// useful method for debugging
 void MinHeap::PrintHeap(){
 	for (int i = 0; i < _heap.size(); i++){
 		cout << "(" << get<0>(_heap[i]) << ", " << get<1>(_heap[i]) << ")  ";
@@ -146,6 +146,7 @@ bool MinHeap::IsEmpty(){
 	return _heap.empty();
 }
 
+// return IDs of nodes remaining in the tree
 vector<int> MinHeap::IDsRemaining(){
 	vector<int> remaining;
 	for (int i = 1; i < _indexmap.size(); ++i){

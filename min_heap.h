@@ -1,6 +1,5 @@
 #include <vector>
 #include <tuple>
-//#include <map>
 
 // Leaf stores <weight, ID_node>
 typedef std::tuple<float, int> Leaf;
@@ -11,7 +10,7 @@ class MinHeap
 {
 private:
 	std::vector<Leaf> _heap;
-	// map to make DecreaseKey more efficient
+	// mapping to make DecreaseKey more efficient
 	std::vector<int> _indexmap;
 	void Heapify();
 	void HeapUp(int index);
@@ -21,7 +20,6 @@ public:
 
 	Leaf Peek();
 	Leaf ExtractMin();
-	//void Insert(Leaf newVal);
 	bool DecreaseKey(int ID, float newWeight);
 	void PrintHeap();
 	bool IsEmpty();
