@@ -5,7 +5,7 @@
 // Leaf stores <weight, ID_node>
 typedef std::tuple<float, int> Leaf;
 
-#define D 2 // number of children per node
+#define D 2// number of children per node
 
 class MinHeap
 {
